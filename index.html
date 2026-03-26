@@ -1,238 +1,352 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>𝐌𝐔𝐍𝐀𝐀𝐅 – Trade With Munaaf (తెలుగు)</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle, #000 40%, #111);
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent: #ff5a00;
+      --teal: #00ffd5;
+      --orange-gradient: linear-gradient(135deg, #ff5a00, #ff8c00, #ff5a00, #00ffd5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      background-color: #050505;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      position: fixed;
+    }
+
+    /* BLURRY AURA BLOBS */
+    .background-wrapper {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      filter: blur(80px);
+      opacity: 0.55;
+    }
+
+    .blob {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      animation: move 20s infinite alternate;
+    }
+
+    .blob-1 { top: -10%; left: -10%; background: #7a2400; }
+    .blob-2 { bottom: -10%; right: -10%; background: #ff5a00; animation-duration: 25s; }
+    .blob-3 { top: 40%; left: 30%; width: 200px; height: 200px; background: #00b09b; animation-duration: 15s; }
+
+    @keyframes move {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(100px, 100px) scale(1.2); }
+    }
+
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-family: Arial, sans-serif;
-      color: #fff;
-      padding: 20px 16px 60px;
-    }
-
-    .card {
+      height: 100vh;
       width: 100%;
-      max-width: 360px;
-      background: linear-gradient(180deg, #4b84b2, #365f74);
-      border-radius: 22px;
-      padding: 28px 20px 30px;
+      padding: 20px;
       text-align: center;
-      box-shadow: 0 0 28px rgba(255,102,0,0.55);
-      border: 2px solid #ff5a00;
+      z-index: 10;
+      overflow-y: auto;
     }
 
-    /* Profile */
-    .profile-wrap {
+    /* LOGO */
+    .logo-wrapper { margin-bottom: 14px; }
+
+    .logo {
       width: 110px;
       height: 110px;
-      margin: 0 auto 16px;
       border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(45deg, #ff5a00, #00ffd5);
-      display: block;
+      padding: 3px;
+      background: var(--orange-gradient);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: float 4s ease-in-out infinite;
+      margin: 0 auto;
       text-decoration: none;
-      transition: transform .2s;
+      display: block;
     }
-    .profile-wrap:hover { transform: scale(1.05); }
-    .profile-wrap img {
+
+    .logo img {
       width: 100%; height: 100%;
       border-radius: 50%;
       object-fit: cover;
+      border: 2px solid #000;
       display: block;
     }
 
+    /* TITLE */
     h1 {
-      color: #00ffd5;
-      font-size: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 5.5vw, 1.9rem);
+      background: var(--orange-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 5px;
       letter-spacing: 1px;
-      margin-bottom: 6px;
-      line-height: 1.35;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+      line-height: 1.3;
     }
 
-    .sub {
-      font-size: 14px;
-      opacity: .9;
-      margin-bottom: 12px;
-      font-weight: 700;
-      letter-spacing: .5px;
+    .team-tag {
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+
+    /* GLASS PANEL */
+    .glass-panel {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 22px 20px;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
 
     .divider {
       height: 1px;
-      background: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
       margin: 10px 0;
     }
 
     .feat {
-      margin: 6px 0;
-      font-size: 14px;
+      font-size: 0.92rem;
       opacity: .95;
+      padding: 2px 0;
     }
 
-    /* Timer */
+    /* TIMER */
     .timer-wrap {
-      margin: 14px 0 6px;
-      font-size: 15px;
+      font-size: 0.95rem;
       font-weight: bold;
-      color: #ff5a00;
+      color: var(--accent);
       letter-spacing: .5px;
+      margin-top: 14px;
     }
-    .timer-wrap span { color: #00ffd5; font-size: 18px; }
+    .timer-wrap span { color: var(--teal); font-size: 1.05rem; }
 
     .join-text {
-      margin: 4px 0 2px;
       font-style: italic;
-      opacity: .9;
-      font-size: 14px;
-    }
-
-    /* Button */
-    .btn {
-      display: block;
-      margin: 16px auto 8px;
-      padding: 14px 20px;
-      width: 88%;
-      border-radius: 30px;
-      background: linear-gradient(90deg, #ff5a00, #00ffd5);
-      color: #000;
-      font-weight: bold;
-      font-size: 15px;
-      text-decoration: none;
-      letter-spacing: 1px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.45);
-      transition: transform .2s, box-shadow .2s;
-      animation: btnPulse 1.8s ease-in-out infinite;
-    }
-    .btn:hover { transform: scale(1.06); }
-    @keyframes btnPulse {
-      0%,100% { transform: scale(1); box-shadow: 0 6px 18px rgba(0,0,0,.45); }
-      50%      { transform: scale(1.05); box-shadow: 0 8px 26px rgba(255,90,0,.55); }
-    }
-
-    /* Quote */
-    .quote {
-      font-size: 12.5px;
-      margin: 12px 0 0;
       opacity: .85;
-      line-height: 1.55;
-      font-style: italic;
-      color: #cff;
+      font-size: 0.88rem;
+      margin-top: 4px;
     }
 
-    /* Credit line */
-    .agency-footer {
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 14px;
+    }
+
+    .stat-item b {
+      color: var(--teal);
+      font-size: 1.2rem;
+      display: block;
+    }
+
+    .stat-item p {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    /* CTA BUTTON */
+    .btn-join {
+      width: 100%;
+      max-width: 320px;
+      padding: 18px 20px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #000;
+      background: var(--orange-gradient);
+      text-decoration: none;
+      border-radius: 50px;
+      text-transform: uppercase;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
-      margin-top: 20px;
-      font-size: 12.5px;
-      color: rgba(255,255,255,.6);
-      text-decoration: none;
-      transition: color .2s;
+      gap: 10px;
+      box-shadow: 0 15px 35px rgba(255, 90, 0, 0.45);
+      animation: zoomPulse 2s infinite ease-in-out;
+      letter-spacing: 1px;
     }
-    .agency-footer:hover { color: #fff; }
-    .agency-footer span { opacity: .75; }
-    .agency-footer strong { color: #00aaff; font-weight: 800; letter-spacing: .3px; }
 
-    /* Responsive */
-    @media (max-width: 380px) {
-      .card { padding: 24px 16px 26px; }
-      h1 { font-size: 17px; }
-      .btn { font-size: 14px; padding: 13px 16px; }
+    @keyframes zoomPulse {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* QUOTE */
+    .quote {
+      font-size: 0.78rem;
+      margin-top: 18px;
+      opacity: .8;
+      line-height: 1.6;
+      font-style: italic;
+      color: #cff;
+      max-width: 360px;
+    }
+
+    /* FOOTER */
+    .footer {
+      margin-top: 18px;
+      font-size: 0.7rem;
+      opacity: 0.7;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .agency-link {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
+  <!-- BLURRY BG BLOBS -->
+  <div class="background-wrapper">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
 
-    <!-- Logo — linked -->
-    <a href="https://t.me/+YQP1jm5jyL0zMGQ1" target="_blank" rel="noopener" class="profile-wrap">
-      <img src="https://fantasticczone.site/wp-content/uploads/2026/03/ethhc.jpg" alt="Trade With Munaaf"
-        onerror="this.src='https://via.placeholder.com/110/000/00ffd5?text=M'"/>
-    </a>
+  <div class="container">
 
-    <!-- Title -->
-    <h1>𝐓𝐑𝐀𝐃𝐄 𝐖𝐈𝐓𝐇 𝐌𝐔𝐍𝐀𝐀𝐅<br/>( తెలుగు )</h1>
-
-    <p class="sub">NIFTY &nbsp;·&nbsp; BANKNIFTY &nbsp;·&nbsp; SENSEX</p>
-
-    <div class="divider"></div>
-    <p class="feat">DAILY CALLS AVAILABLE ✅</p>
-    <div class="divider"></div>
-    <p class="feat">95% Accuracy Confirm ⭐</p>
-    <div class="divider"></div>
-    <p class="feat">6 Year Experience 🎯</p>
-    <div class="divider"></div>
-
-    <!-- Countdown timer -->
-    <div class="timer-wrap">
-      ⏳ Redirecting in <span id="t">5</span>s...
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <a href="https://t.me/+YQP1jm5jyL0zMGQ1" target="_blank" rel="noopener" class="logo">
+        <img src="https://fantasticczone.site/wp-content/uploads/2026/03/ethhc.jpg" alt="Trade With Munaaf"
+          onerror="this.src='https://via.placeholder.com/110/000/00ffd5?text=M'"/>
+      </a>
     </div>
 
-    <p class="join-text">So join fast guys 🚀</p>
+    <!-- TITLE -->
+    <h1>𝐓𝐑𝐀𝐃𝐄 𝐖𝐈𝐓𝐇 𝐌𝐔𝐍𝐀𝐀𝐅<br/>( తెలుగు )</h1>
+    <div class="team-tag">NIFTY &nbsp;·&nbsp; BANKNIFTY &nbsp;·&nbsp; SENSEX</div>
 
-    <!-- CTA Button -->
-    <a href="https://t.me/+YQP1jm5jyL0zMGQ1" target="_blank" rel="noopener" class="btn">
+    <!-- GLASS PANEL -->
+    <div class="glass-panel">
+      <p class="feat">DAILY CALLS AVAILABLE ✅</p>
+      <div class="divider"></div>
+      <p class="feat">95% Accuracy Confirm ⭐</p>
+      <div class="divider"></div>
+      <p class="feat">6 Year Experience 🎯</p>
+
+      <div class="stats">
+        <div class="stat-item">
+          <b>95%</b>
+          <p>Accuracy</p>
+        </div>
+        <div class="stat-item">
+          <b>6 Yrs</b>
+          <p>Experience</p>
+        </div>
+        <div class="stat-item">
+          <b>DAILY</b>
+          <p>Live Calls</p>
+        </div>
+      </div>
+
+      <!-- TIMER -->
+      <div class="timer-wrap">⏳ Redirecting in <span id="t">5</span>s...</div>
+      <p class="join-text">So join fast guys 🚀</p>
+    </div>
+
+    <!-- CTA BUTTON -->
+    <a href="https://t.me/+YQP1jm5jyL0zMGQ1" target="_blank" rel="noopener" class="btn-join">
       📲 JOIN CHANNEL
     </a>
 
-    <!-- Tamil quote -->
+    <!-- QUOTE -->
     <p class="quote">
-      "விதிகள் நல்லதாகவும், கடின உழைப்பு உண்மையாகவும் இருந்தால்,<br/>
-      வெற்றி நிச்சயமாக அடையப்படும்."
+      "విధులు నల్లమంచిగా, కష్టపడటం నిజంగా ఉంటే,<br/>
+      విజయం తప్పకుండా వస్తుంది."
     </p>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>Ads Managed by<br>
+        <a href="https://telegram.me/+TRlJl628l-FkMWE9" class="agency-link">Nexgroww Agency</a>
+      </p>
+    </div>
 
   </div>
 
-  <!-- Credit line -->
-  <a href="https://telegram.me/+TRlJl628l-FkMWE9" class="agency-footer" target="_blank" rel="noopener">
-    <span>Ads Managed by</span>
-    <strong>Nexgroww Agency</strong>
-  </a>
-
-  <!-- Redirect script -->
+  <!-- REDIRECT SCRIPT -->
   <script>
-  //  let sec = 5;
-   // const el = document.getElementById('t');
-    const iv = setInterval(() => {
+ //   let sec = 5;
+ //   const el = document.getElementById('t');
+ //   const iv = setInterval(() => {
       sec--;
-   //   if (sec <= 0) {
+  //    if (sec <= 0) {
         clearInterval(iv);
-        el.innerText = '0';
-   //     window.location.href = 'https://t.me/+YQP1jm5jyL0zMGQ1';
+   //     el.innerText = '0';
+        window.location.href = 'https://t.me/+YQP1jm5jyL0zMGQ1';
       } else {
-    //    el.innerText = sec;
+        el.innerText = sec;
       }
-   // }, 1000);
+    }, 1000);
   </script>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '944030698036792');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=944030698036792&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '944030698036792');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=944030698036792&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
 </body>
 </html>
